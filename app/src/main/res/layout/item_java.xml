@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_marginTop="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:roundedimageview="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
+    <win.haotinayi.fakesms.view.CircleImageView
+        android:id="@+id/iv_android"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+
+        android:src="@drawable/java"
+        roundedimageview:roundedimageview_border_thickness="1dp"/>
+
+    <TextView android:id="@+id/tv_android" android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="5dp"
+              android:layout_toRightOf="@id/iv_android"
+              android:layout_marginLeft="10dp"
+              android:text="Java开发"
+              android:textSize="18sp"/>
+    <RatingBar
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/tv_android"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/iv_android"
+
+        android:clickable="false" android:focusableInTouchMode="false"
+        android:numStars="100" android:rating="65"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/iv_android"
+        android:textSize="15sp"
+        android:textColor="@color/colorAccent"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="@string/java_desc"/>
+</RelativeLayout>

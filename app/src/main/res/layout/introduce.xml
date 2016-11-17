@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/desc_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:text="天意" android:textColor="@color/colorAccent"
+        android:textSize="15sp"/>
+    <TextView
+        android:id="@+id/desc_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/desc_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:drawableLeft="@drawable/ic_location"
+        android:gravity="center" android:text="中国.广州"
+        android:textColor="@color/colorAccent" android:textSize="10sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/desc_location"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_github"
+            android:layout_width="0dp"
+            android:textSize="15sp"
+            android:layout_height="match_parent" android:layout_weight="1" android:clickable="true"
+            android:gravity="center" android:onClick="net" android:text="GitHub"/>
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="1dp" android:layout_height="30dp"
+            android:background="@color/colorAccent"/>
+
+        <TextView
+            android:id="@+id/tv_cadn"
+            android:layout_width="0dp"
+            android:textSize="15sp"
+            android:layout_height="match_parent" android:layout_weight="1" android:clickable="true"
+            android:gravity="center" android:onClick="net" android:text="CSDN"/>
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="1dp" android:layout_height="30dp"
+            android:background="@color/colorAccent"/>
+        <TextView
+            android:id="@+id/tv_juejin"
+            android:layout_width="0dp"
+            android:textSize="15sp"
+            android:layout_height="match_parent" android:layout_weight="1" android:clickable="true"
+            android:gravity="center" android:onClick="net" android:text="掘金"/>
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="1dp" android:layout_height="30dp"
+            android:background="@color/colorAccent"/>
+        <TextView
+            android:id="@+id/tv_zhuye"
+            android:textSize="15sp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" android:layout_weight="1" android:clickable="true"
+            android:gravity="center" android:onClick="net" android:text="个人主页"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

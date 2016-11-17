@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">短信作弊器</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="desc"></string>
+    <string name="android_desc">
+        Android是一种基于Linux的自由及开放源代码的操作系统，主要使用于移动设备，如智能手机和平板电脑，由Google公司和开放手机联盟领导及开发。尚未有统一中文名称，中国大陆地区较多人使用“安卓”或“安致”。Android操作系统最初由Andy
+        Rubin开发，主要支持手机。
+    </string>
+    <string name="java_desc">
+        Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念，因此Java语言具有功能强大和简单易用两个特征。Java语言作为静态面向对象编程语言的代表，极好地实现了面向对象理论，允许程序员以优雅的思维方式进行复杂的编程
+    </string>
+    <string name="title_activity_use">UseActivity</string>
+    <string name="large_text">
+        "使用方法.\n\n"
+
+        "首先正确输入电话号码和时间以及短信的内容\n\n"
+        "然后点击设置成默认应用（在APP启动时系统会自动弹出，请授权应用）\n\n "
+        "当使用完成的时候，请设置回默认短信，否则可能有些短信没有接收到\n\n"
+
+        "如果您觉得软件好用，请到GitHub给一个星 \n\n"
+        "如果您觉得软件好用，请到GitHub给一个星 \n\n"
+
+
+        "如果您觉得软件好用，请到GitHub给一个星 \n\n"
+        "天意作品   hao.ty@haotianyi.win   \n\n"
+
+
+
+
+
+    </string>
+</resources>
