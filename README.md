@@ -10,7 +10,7 @@
 
 ## 使用
 
- ### 模拟器中的测试：
+### 模拟器中的测试：
 
 ![sp161117_200105](http://oaxelf1sk.bkt.clouddn.com/sp161117_200105.png)
 
@@ -30,7 +30,7 @@
 
 ## 源码
 
-请参考：[GitHub]()
+请参考：[GitHub](https://github.com/HaoTianYi/FakeSms)
 
 
 
