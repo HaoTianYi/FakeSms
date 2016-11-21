@@ -127,14 +127,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void insertSms(View view) {
-//        PackageManager pm = this.getPackageManager();
-//        Intent intent = new Intent();
-//        intent.setAction("android.provider.Telephony.SMS_DELIVER");
-//        List<ResolveInfo> receivers = pm.queryBroadcastReceivers(intent, PackageManager.GET_INTENT_FILTERS);
-//        String[] result = new String[receivers.size()];
-//        for (int i = 0; i < receivers.size(); i++) {
-//            result[i] = receivers.get(i).activityInfo.packageName;
-//        }
+
         if (Build.VERSION.SDK_INT >= 20) {
             if (!getPackageName().equals(getSystemDefaultSms())) {
                 setDefaultSms(getPackageName());
