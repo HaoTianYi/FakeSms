@@ -15,9 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入电话号码"
-            android:inputType="phone"
+            android:inputType="number"
             android:lines="1"
-            android:maxLength="11"
+
             android:textSize="18sp"
         />
     </android.support.design.widget.TextInputLayout>
@@ -79,7 +79,9 @@
         android:textColor="@color/colorAccent"
         android:textSize="15sp"/>
 
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
               android:layout_marginTop="10dp"
               android:padding="5dp"
               android:text="如果您刚刚已经设置成默认短信程序，那么在输入内容之后直接点击插入短信即可，否则请先设置成默认短信程序"

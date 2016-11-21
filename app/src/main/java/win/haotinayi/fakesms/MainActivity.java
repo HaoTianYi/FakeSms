@@ -1,9 +1,11 @@
 package win.haotinayi.fakesms;
 
+import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Telephony;
 import android.support.design.widget.NavigationView;
@@ -18,6 +20,7 @@ import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -43,8 +46,11 @@ public class MainActivity extends AppCompatActivity
     TextInputLayout mTilContent;
     @BindView(R.id.btn)
     Button mBtn;
+    @BindView(R.id.tv_hint)
+    TextView mTvHint;
 
     private String systemSms;
+    private SharedPreferences mIndex;
 
 
     @Override
@@ -62,17 +68,30 @@ public class MainActivity extends AppCompatActivity
 
         initListener();
 
-        systemSms = getSystemDefaultSms();
 
-        SharedPreferences index = getSharedPreferences("index", MODE_PRIVATE);
-        int count = index.getInt("count", 0);
-        index.edit().putInt("count",count++);
+        if (Build.VERSION.SDK_INT >= 20) {
 
-        if (count==0){
-            onclickSetSms(null);
+            systemSms = getSystemDefaultSms();
+            mIndex = getSharedPreferences("index", MODE_PRIVATE);
+            int count = mIndex.getInt("count", 0);
+
+            if (count == 0) {
+                onclickSetSms(null);
+                mIndex.edit().putString("sms", systemSms);
+            } else {
+                if (getPackageName().equals(Telephony.Sms.getDefaultSmsPackage(this))) {
+                    mBtn.setBackgroundResource(R.drawable.btn_bg);
+                    mBtn.setText("还原默认短信程序");
+                    System.out.println(Telephony.Sms.getDefaultSmsPackage(this));
+                }
+            }
+
+            mIndex.edit().putInt("count", ++count).commit();
+            System.out.println(mIndex.getInt("count", 0));
+        } else {
+            mBtn.setVisibility(View.GONE);
+            mTvHint.setText("请点击插入短信");
         }
-
-
 
     }
 
@@ -116,11 +135,12 @@ public class MainActivity extends AppCompatActivity
 //        for (int i = 0; i < receivers.size(); i++) {
 //            result[i] = receivers.get(i).activityInfo.packageName;
 //        }
-
-
-        if (!getPackageName().equals(getSystemDefaultSms())) {
-            setDefaultSms(getPackageName());
+        if (Build.VERSION.SDK_INT >= 20) {
+            if (!getPackageName().equals(getSystemDefaultSms())) {
+                setDefaultSms(getPackageName());
+            }
         }
+
 
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -161,9 +181,8 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     public String getSystemDefaultSms() {
-
-        System.out.println(Telephony.Sms.getDefaultSmsPackage(this));
         return Telephony.Sms.getDefaultSmsPackage(this);
     }
 
@@ -187,7 +206,7 @@ public class MainActivity extends AppCompatActivity
             mBtn.setBackgroundResource(R.drawable.btn_bg);
             mBtn.setText("还原默认短信程序");
         } else {
-            setDefaultSms(systemSms);
+            setDefaultSms(mIndex.getString("sms", "com.android.messaging"));
             mBtn.setBackgroundResource(R.drawable.btn_error);
             mBtn.setText("设置成默认短信程序");
         }
@@ -226,30 +245,30 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Toast.makeText(MainActivity.this,"如果您觉得本软件好用，请到GitHub给一个星",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "如果您觉得本软件好用，请到GitHub给一个星", Toast.LENGTH_SHORT).show();
             Uri uri = Uri.parse("https://github.com/HaoTianYi/");
             Intent it = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(it);
         } else if (id == R.id.nav_gallery) {
-            Toast.makeText(MainActivity.this,"如果您觉得本软件好用，请到GitHub给一个星",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "如果您觉得本软件好用，请到GitHub给一个星", Toast.LENGTH_SHORT).show();
             Uri uri1 = Uri.parse("http://blog.csdn.net/simaxiaochen/");
             Intent it1 = new Intent(Intent.ACTION_VIEW, uri1);
             startActivity(it1);
         } else if (id == R.id.nav_slideshow) {
-            Toast.makeText(MainActivity.this,"如果您觉得本软件好用，请到GitHub给一个星",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "如果您觉得本软件好用，请到GitHub给一个星", Toast.LENGTH_SHORT).show();
             Uri uri2 = Uri.parse("http://gold.xitu.io/user/5821a7c2d20309005514b249/");
             Intent it2 = new Intent(Intent.ACTION_VIEW, uri2);
             startActivity(it2);
         } else if (id == R.id.nav_manage) {
-            Toast.makeText(MainActivity.this,"如果您觉得本软件好用，请到GitHub给一个星",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "如果您觉得本软件好用，请到GitHub给一个星", Toast.LENGTH_SHORT).show();
             Uri uri3 = Uri.parse("http://www.haotianyi.win/");
             Intent it3 = new Intent(Intent.ACTION_VIEW, uri3);
             startActivity(it3);
-        }else if (id==R.id.nav_send){
+        } else if (id == R.id.nav_send) {
             Intent intent = new Intent(MainActivity.this, DetailActivity.class);
             startActivity(intent);
 
-        }else if (id==R.id.nav_share){
+        } else if (id == R.id.nav_share) {
             Intent intent = new Intent(MainActivity.this, UseActivity.class);
             startActivity(intent);
         }
