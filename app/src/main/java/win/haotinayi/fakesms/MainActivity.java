@@ -28,6 +28,8 @@ import java.text.SimpleDateFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import win.haotinayi.fakesms.strategy.HighStrategy;
+import win.haotinayi.fakesms.strategy.LowStrategy;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,29 +70,13 @@ public class MainActivity extends AppCompatActivity
 
         initListener();
 
+        mIndex = getSharedPreferences("index", MODE_PRIVATE);
 
+//      添加策略模式
         if (Build.VERSION.SDK_INT >= 20) {
-
-            systemSms = getSystemDefaultSms();
-            mIndex = getSharedPreferences("index", MODE_PRIVATE);
-            int count = mIndex.getInt("count", 0);
-
-            if (count == 0) {
-                onclickSetSms(null);
-                mIndex.edit().putString("sms", systemSms);
-            } else {
-                if (getPackageName().equals(Telephony.Sms.getDefaultSmsPackage(this))) {
-                    mBtn.setBackgroundResource(R.drawable.btn_bg);
-                    mBtn.setText("还原默认短信程序");
-                    System.out.println(Telephony.Sms.getDefaultSmsPackage(this));
-                }
-            }
-
-            mIndex.edit().putInt("count", ++count).commit();
-            System.out.println(mIndex.getInt("count", 0));
+            new HighStrategy(MainActivity.this, mBtn).editSharedPreference(getSharedPreferences("index", MODE_PRIVATE));
         } else {
-            mBtn.setVisibility(View.GONE);
-            mTvHint.setText("请点击插入短信");
+            new LowStrategy().setButtonStatus(mBtn).setHintStatus(mTvHint);
         }
 
     }
