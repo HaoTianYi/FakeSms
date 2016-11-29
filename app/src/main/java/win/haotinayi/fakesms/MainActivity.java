@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity
 
     private String systemSms;
     private SharedPreferences mIndex;
+    private HighStrategy mHighStrategy;
 
 
     @Override
@@ -74,7 +75,8 @@ public class MainActivity extends AppCompatActivity
 
 //      添加策略模式
         if (Build.VERSION.SDK_INT >= 20) {
-            new HighStrategy(MainActivity.this, mBtn).editSharedPreference(getSharedPreferences("index", MODE_PRIVATE));
+            mHighStrategy = new HighStrategy(MainActivity.this, mBtn);
+            mHighStrategy.editSharedPreference(getSharedPreferences("index", MODE_PRIVATE));
         } else {
             new LowStrategy().setButtonStatus(mBtn).setHintStatus(mTvHint);
         }
@@ -171,24 +173,15 @@ public class MainActivity extends AppCompatActivity
      * @param packageName
      */
     public void setDefaultSms(String packageName) {
-
-        Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
-        intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, packageName);
-        startActivity(intent);
-
+        mHighStrategy.setDefaultSms(packageName);
     }
 
-
+    /**
+     * 按钮的变化
+     * @param view
+     */
     public void onclickSetSms(View view) {
-        if (!getSystemDefaultSms().equals(getPackageName())) {
-            setDefaultSms(getPackageName());
-            mBtn.setBackgroundResource(R.drawable.btn_bg);
-            mBtn.setText("还原默认短信程序");
-        } else {
-            setDefaultSms(mIndex.getString("sms", "com.android.messaging"));
-            mBtn.setBackgroundResource(R.drawable.btn_error);
-            mBtn.setText("设置成默认短信程序");
-        }
+        mHighStrategy.onclickSetSms(mIndex);
     }
 
     private void init() {
